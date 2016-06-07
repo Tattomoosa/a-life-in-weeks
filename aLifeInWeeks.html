@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+	<head>
+		<link href='https://fonts.googleapis.com/css?family=Mallanna' rel='stylesheet' type='text/css'>
+		<link href='lifeCalendar.css' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="jquery-ui.css">
+		<script src="jquery-2.2.3.js"></script>
+		<script src="jquery-ui.js"></script>
+
+	</head>
+
+	<body>
+		<div id='curtain'></div>
+		<div id='header'>
+			<span class='noselect'>a life in weeks</span>
+			<div id='drawertoggle' onclick='closeDrawer()'>
+				<div class='leftarrowline'></div>
+				<div class='rightarrowline'></div>
+			</div>
+		</div>
+
+		<div id='bdayinputdrawer'>
+			<div class='center'>
+
+
+
+				</br>	
+				<div class='center'>
+				<div <div  class='noselect bdaytext'>What day were you born?</div>
+				<div class='bdayinput'>
+					<br/>
+					<div class='bdayinput'>
+						<input type='button' id='monthup' value='+' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(1, $( "#month" ))'>
+						<input type='number' id='month' value='1' min='1' max='12' tabindex='1'>
+						<input type='button' id='monthdown' value='-' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-1, $( "#month" ))'>
+						<label for='month'>MONTH</label>
+					</div>
+					<div class='bdayinput'>
+
+						<input type='button' id='dayupten' value='++' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(10, $( "#day" ))'>
+						<input type='button' id='dayup' value='+' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(1, $( "#day" ))'>
+						<input type='number' id='day' value='1' min='1' max='31' tabindex='2'
+							onchange='numberButton(0, $ "#day" ))'>
+						<input type='button' id='daydownten' value='--' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-10, $( "#day" ))'>
+						<input type='button' id='daydown' value='-' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-1, $( "#day" ))'>
+						<label for='day'>DAY</label>
+
+					</div>
+					<div class='bdayinput'>
+						<input type='button' id='yearupten' value='++' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(10, $( "#year" ))'>
+						<input type='button' id='yearup' value='+' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(1, $( "#year" ))'>
+						<input type='number' id='year' value='1985' min='1900' max='2016' tabindex='3'>
+						<input type='button' id='yeardownten' value='--' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-10, $( "#year" ))'>
+						<input type='button' id='yeardown' value='-' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-1, $( "#year" ))'>
+
+						<label for='year' style='display:block'>YEAR</label>
+					</div>
+
+				</div>
+
+			</div>
+			<div>
+				<br/>
+				<div  class='noselect bdaytext'>
+					At what age should the calender end?	
+					<a href='' style='font-size: 8pt;'>What?</a>
+				</div>
+				</br>
+
+				<div class='center'>
+					<div class='bdayinput'>
+						<input type='button' id='malebutton' value='MALE' class='endbutton'
+							onclick='setValue($( "#endyear" ), 76)'>
+						<input type='button' id='otherbutton' value='AVERAGE' class='endbutton'
+							onclick='setValue($( "#endyear" ), 79)'>
+						<input type='button' id='femalebutton' value='FEMALE' class='endbutton'
+							onclick='setValue($( "#endyear" ), 81)'>
+						<label>BY LIFE EXPECTANCY (U.S. 2016)</label>
+					</div>
+					<div class='bdayinput'>
+						<div class='buttondivider noselect'>OR</div>
+					</div>
+					<div class='bdayinput'>
+						<input type='button' id='endupten' value='++' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(10, $( "#endyear" ))'>
+						<input type='button' id='endup' value='+' class='topnumbutton' tabindex='-1'
+							onclick='numberButton(1, $( "#endyear" ))'>
+						<input type='number' id='endyear' value='79' class='endbutton' min='0'>
+						<input type='button' id='enddownten' value='--' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-10, $( "#endyear" ))'>
+						<input type='button' id='enddown' value='-' class='botnumbutton' tabindex='-1'
+							onclick='numberButton(-1, $( "#endyear" ))'>
+						<label>CUSTOM AGE</label>
+					</div>
+				</div>
+			</div>
+					</br>
+			<div class='center'>
+				<input
+				type='button'
+				id='submitbutton'
+				value='CALCULATE'
+				onclick='calculate()'
+				>
+			</div>
+		</div>
+		</div>
+
+		<div style='position:inline-block; margin:auto; text-align:center;'>	
+		<div id='calcontain'>
+			<div id='week-axis'>
+				<span class='noselect'>Week, Per Year</span>
+			</div>
+			<div id='year-axis'>
+				<div class='noselect'>Year</div>
+			</div>
+			<div class='textcontainer'>
+				<span>
+					you have</br>
+					lived for </br>
+					<span id='weekslived'>000</span> weeks.<br/></br>
+					in <span id='weekstogo'>000</span> weeks</br>
+					you will turn <span id='maxage'>00</span>.
+				</span>
+			</div>
+			<table id='caltable'>
+			</table>
+		</div>
+		</div>
+
+		<div id='footer'>
+
+			<div class='footleft'>Created by:<a href=''>Matt O'Tousa</a></div>
+			<div class='footright'>Inspired by:<a href=''>Wait But Why</a></div>
+		</div>
+
+
+	<script>
+
+
+$(document).ready(function() {
+	calculate();
+});
+closeDrawer();
+
+//fillSpentToNumber(1200);
+
+
+function numberButton(val, which) {
+	which.val( parseInt( which.val() ) + val );
+	console.log ('checkin numbers!!!');
+
+	if (parseInt ( which.val() ) > parseInt ( which.prop('max') ) ) {
+		which.val( parseInt( which.prop ('max') ) );
+	}
+	if (parseInt ( which.val() ) < parseInt ( which.prop('min') ) ) {
+		which.val( parseInt( which.prop ('min') ) );
+	}
+}
+
+function setValue(which, value) {
+	which.val(value)
+}
+
+function calculate() {
+	var num = getNumberFromDate();
+	$( '#caltable' ).empty();
+	buildTable();
+
+	var weeksLived = Math.round (num);
+	var endAge =  $( '#endyear' ).val();
+	var weeksToEnd = (endAge*52)-weeksLived;
+	fillSpentToNumber( num );
+
+	console.log ( $( '#endyear' ).val() );
+
+	$( '#maxage' ).html( endAge );
+	$( '#weekslived' ).html(weeksLived);
+	$( '#weekstogo' ).html(weeksToEnd);
+
+}
+
+function closeDrawer() {
+	if ( $( '#bdayinputdrawer' ).position().top < -0) {
+		var drawerHeight =  $( '#bdayinputdrawer' ).height();
+		// var y = window.innerHeight/2 - (drawerHeight/2); //for center
+
+		var headerHeight = $( '#header' ).height();	//for drawer
+		var y = (headerHeight)						//""
+
+		$( '#bdayinputdrawer' ).css ('top', y );
+		$( '.leftarrowline' ).css ('left', '6px');
+		$( '.rightarrowline' ).css ('right', '6px');
+		$( '.leftarrowline, .rightarrowline' ).css ('top', '9px');
+		$( '#curtain' ).css ({
+			'background' : 'hsla(200, 58%, 90%, 1)',
+			'pointer-events' : 'auto'
+			});
+
+		//$( '#header' ).css ('top', -41);
+
+	} else {
+		$( '#bdayinputdrawer' ).css ('top', -500 );
+		$( '.leftarrowline' ).css ('left', '4px');
+		$( '.rightarrowline' ).css ('right', '4px');
+		$( '.leftarrowline, .rightarrowline' ).css ('top', '10px');
+		$( '#curtain' ).css ({
+			'background' : 'hsla(200, 58%, 90%, 0)',
+			'pointer-events' : 'none'
+			});
+
+		//$( '#header' ).css ('top', 0);
+
+	}
+}
+
+
+function getNumberFromDate() {
+	var day = $(' #day ').val();
+	var month = $(' #month ').val();
+	var year = $(' #year ').val();
+
+	//convert dat shit to milliseconds
+
+
+	var birthDate = new Date(year+'-'+month+'-'+day);
+	var birthTime = birthDate.getTime();
+
+
+	var nowDate = new Date();
+	var nowTime = nowDate.getTime();
+
+	var timeDif = Math.abs (nowTime - birthTime);
+	var weeks = timeDif / (1000*60*60*24*7);
+
+	return weeks
+
+}
+
+function tdMouseOver() {
+	console.log (this);
+}
+
+function buildTable() {
+
+	var cal = $(' #caltable ');
+	var tr;
+	var endpoint = $(' #endyear ').val(); //in years, from #endyear
+
+	console.log (cal);
+
+	for (var i=1; i <= endpoint; i++) {
+		$(' #caltable ').append ('<tr datacol=\'' + i + '\'>');
+	}
+
+	for (var n=1; n <= 52; n++) {
+		$( '#caltable tr' ).append ('<td datarow=\'' + n + '\'></td> ');
+	}
+}
+
+function findCell (column, row) {
+	//console.log('finding cell at: ' + column + ',' + row); //column strangely corresponds to x and row to y due to how html does shit
+	return $(' #caltable tr:nth-child(' + row + ') td:nth-child(' + column + ')');
+
+}
+
+function fillRow (row) {
+	var myRow = $(' #caltable tr:nth-child(' + row + ') td' );
+	writeCellSpent (myRow)
+}
+
+function writeCellSpent (cell) {
+	cell.addClass('spent');
+}
+
+function rowLength (row) {
+	return $(' #caltable tr:nth-child(' + row + ') td').length;
+}
+
+function clearTable () {
+	$( '#caltable tr td' ).removeClass('spent')
+	$( '#caltable tr td' ).removeClass('current');
+}
+function fillSpentToNumber (number) {
+
+	var rows;
+	var length = rowLength (1); //DOES NOT ALLOW FOR TABLES WITH VARYING ROW LENGTHS
+	var lastRowColumns;
+
+	clearTable(); //don't want old results interfering
+
+	rows = Math.floor ( number/ length );
+	lastRowColumns = number % length;
+
+	//console.log (rows, lastRowColumns);
+
+	for (var r = 0; r <= rows; r++) {
+		fillRow (r);	
+	}
+
+	for (var c = 0; c < lastRowColumns; c++) {
+		findCell(c, r).addClass('spent');
+	}
+
+	findCell(c, r).addClass('current');
+
+	closeDrawer();
+}
+
+//});
+	</script>
+	</body>
+</html>
