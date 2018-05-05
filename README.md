@@ -1,4 +1,4 @@
-README for 'a life in weeks' web app
+A Life In Weeks
 ===
 
 This is a very simple little web application inspired by the blog Wait But Why, specifically
